@@ -1,94 +1,105 @@
-# Next Word Prediction using LSTM
+# Next-Word Predictor with LSTM
 
-This project is about building a **Next Word Prediction Model** using LSTM (Long Short-Term Memory networks) in TensorFlow/Keras.  
+**Predict the next word in a sequence using a compact, production-ready LSTM language model.**
 
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00)](https://www.tensorflow.org/)
+[![Keras](https://img.shields.io/badge/Keras-Deep%20Learning-D00000)](https://keras.io/)
+[![Notebook](https://img.shields.io/badge/Jupyter-Notebook-F37626)](https://jupyter.org/)
+[![License](https://img.shields.io/badge/License-Not%20Specified-lightgrey)](#-license)
 
----
-
-## 1. Project Objective
-The aim is to create a language model that can:
-- Learn patterns of words from a dataset.
-- Predict the next word based on a sequence of previous words.
-- Generate meaningful text automatically.
-
----
-
-## 2. Project Workflow
-
-### Step 1: Importing Libraries
-We use TensorFlow/Keras for deep learning, NumPy for arrays, and Pickle to save the tokenizer.  
-
-### Step 2: Data Preparation
-- Load a text file (`data.txt`).
-- Clean the text (remove newlines, special symbols, and convert to lowercase).
-- Tokenize the text (convert words into numbers).
-- Create training sequences (input words → target next word).
-
-Example:  
-If the sentence is *"the quick brown fox jumps"*, the model learns:
-- Input: `the quick brown fox` → Output: `jumps`.
-
-### Step 3: Model Architecture
-The model uses:
-1. **Embedding Layer** – converts words into dense vectors of fixed size.  
-2. **Bidirectional LSTM Layer** – reads sequences both forward and backward.  
-3. **Dropout Layer** – prevents overfitting.  
-4. **Another LSTM Layer** – captures deeper sequence patterns.  
-5. **Dense Layer (ReLU)** – learns non-linear features.  
-6. **Dense Layer (Softmax)** – outputs probabilities for the next word.
-
-### Step 4: Model Compilation
-- Loss: `categorical_crossentropy`
-- Optimizer: `Adam` with learning rate = 0.001
-
-### Step 5: Training
-- Batch size = 128
-- Epochs = 20 (can be adjusted)
-- **Callbacks Used**:
-  - `ModelCheckpoint`: saves the best model.
-  - `EarlyStopping`: stops training if the loss does not improve.
-
-### Step 6: Text Generation
-A function is provided to:
-- Take a seed text.
-- Predict the next `n` words.
-- Use *temperature sampling* to control creativity:
-  - Low temperature (0.3) → safer, repetitive text.
-  - High temperature (1.0+) → more creative, but sometimes random.
+A clean, end-to-end NLP project that trains a sequence model on raw text and predicts the most likely next word. Ideal for showcasing LSTM-based language modeling, preprocessing pipelines, and text generation techniques.
 
 ---
 
+## 🚀 Project Overview
+This project builds a **next-word prediction engine** using an LSTM-based language model. It ingests a text corpus, learns word sequences, and predicts the next word given a seed phrase—making it a strong foundation for autocomplete, writing assistants, or conversational AI prototypes.
 
-
-
-## 3. How to Run
-
-1. Clone this repository or copy the notebook.
-2. Upload a dataset file as `data.txt` in your working directory.
-3. Run the notebook step by step on **Google Colab** (recommended).
-4. After training, use the `predict_next_words()` function to generate text.
+**Why it matters:** next-word prediction is a core building block for search suggestions, smart typing, and text generation systems.
 
 ---
 
+## ✨ Features
+- **End-to-end pipeline**: text cleaning → tokenization → sequence generation → training
+- **LSTM language model** with embeddings and dropout for generalization
+- **Temperature sampling** to control creativity vs. accuracy during generation
+- **Reproducible artifacts** (tokenizer saved as `token.pkl`)
+- **Notebook-first workflow** suitable for research, demos, and learning
 
 ---
 
-## 4. Improvements and Notes
-- Instead of plain LSTM, you can use **GRU** (faster) or **Transformers** (more powerful).
-- Use larger window size (e.g- 10 words) for better accuracy.
-- Train for more epochs and on larger datasets for improved results.
-- Pre-trained embeddings like **GloVe** or **Word2Vec** can also be used instead of training embeddings from scratch.
+## 🧠 Problem & Solution
+**Problem:** Natural language is sequential and context-dependent. Predicting the next word requires understanding word order and long-range dependencies.
+
+**Solution:** An LSTM-based sequence model trained on a text corpus learns contextual patterns and outputs the most probable next word, with optional sampling for creative generation.
 
 ---
 
-## 5. Requirements
-- Python 3.8+
-- TensorFlow/Keras
-- NumPy
-- Pickle
+## 🛠 Tech Stack
+- **Language:** Python 3.8+
+- **ML Framework:** TensorFlow / Keras
+- **Data Processing:** NumPy
+- **Workflow:** Jupyter Notebook
 
-Install dependencies:
-```bash
-pip install tensorflow numpy
+---
 
+## 📸 Screenshots / Demo
+> No UI included. Run the notebook to see live predictions and generated text.
 
+Example usage (inside the notebook):
+- Seed text → model predicts the next *n* words
+- Adjust **temperature** for safe vs. creative output
+
+---
+
+## ⚙️ Installation & Setup
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ImaduddeenKhan/Next-word-predictor-with-LSTM.git
+   cd Next-word-predictor-with-LSTM
+   ```
+
+2. **Install dependencies**
+   ```bash
+   python -m pip install --upgrade pip
+   pip install tensorflow numpy
+   ```
+
+3. **Prepare your dataset**
+   - Place your raw text file as `data.txt` in the project root.
+
+4. **Run the notebook**
+   - Open `Nextwordpred.ipynb` in Jupyter or Google Colab and execute cells sequentially.
+
+---
+
+## 📂 Project Structure
+```
+.
+├── Nextwordpred.ipynb   # Full training + generation workflow
+├── data.txt             # Training corpus (replace with your dataset)
+├── token.pkl            # Saved tokenizer
+└── README.md            # Project documentation
+```
+
+---
+
+## 🔮 Future Improvements
+- Add **pre-trained embeddings** (GloVe/Word2Vec)
+- Experiment with **GRU** or **Transformer** architectures
+- Add evaluation metrics (perplexity, top-k accuracy)
+- Package as an API for real-time inference
+
+---
+
+## 🤝 Contribution Guidelines
+Contributions are welcome. To contribute:
+1. Fork the repository
+2. Create a new branch (`feature/your-feature`)
+3. Commit your changes
+4. Open a pull request with a clear description
+
+---
+
+## 📜 License
+No license file is currently included. Add a `LICENSE` file to clarify usage and distribution terms.
